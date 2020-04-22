@@ -8,9 +8,32 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Tile",
+"class": "GrassTile",
+"language": "GDScript",
+"path": "res://Scripts/GrassTile.gd"
+}, {
+"base": "Spatial",
+"class": "Terrain",
+"language": "GDScript",
+"path": "res://Scripts/Terrain.gd"
+}, {
+"base": "Spatial",
+"class": "Tile",
+"language": "GDScript",
+"path": "res://Scripts/Tile.gd"
+}, {
+"base": "Tile",
+"class": "WaterTile",
+"language": "GDScript",
+"path": "res://Scripts/WaterTile.gd"
+} ]
 _global_script_class_icons={
-
+"GrassTile": "",
+"Terrain": "",
+"Tile": "",
+"WaterTile": ""
 }
 
 [application]
