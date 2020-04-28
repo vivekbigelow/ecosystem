@@ -9,10 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody",
+"class": "Animal",
+"language": "GDScript",
+"path": "res://Scripts/Animal.gd"
+}, {
 "base": "Tile",
 "class": "GrassTile",
 "language": "GDScript",
 "path": "res://Scripts/GrassTile.gd"
+}, {
+"base": "State",
+"class": "QuenchThirstState",
+"language": "GDScript",
+"path": "res://Scripts/QuenchThirstState.gd"
+}, {
+"base": "KinematicBody",
+"class": "State",
+"language": "GDScript",
+"path": "res://Scripts/State.gd"
 }, {
 "base": "Spatial",
 "class": "Terrain",
@@ -25,14 +40,29 @@ _global_script_classes=[ {
 "path": "res://Scripts/Tile.gd"
 }, {
 "base": "Tile",
+"class": "TreeTile",
+"language": "GDScript",
+"path": "res://Scripts/TreeTile.gd"
+}, {
+"base": "State",
+"class": "WanderState",
+"language": "GDScript",
+"path": "res://Scripts/WanderState.gd"
+}, {
+"base": "Tile",
 "class": "WaterTile",
 "language": "GDScript",
 "path": "res://Scripts/WaterTile.gd"
 } ]
 _global_script_class_icons={
+"Animal": "",
 "GrassTile": "",
+"QuenchThirstState": "",
+"State": "",
 "Terrain": "",
 "Tile": "",
+"TreeTile": "",
+"WanderState": "",
 "WaterTile": ""
 }
 
@@ -40,6 +70,39 @@ _global_script_class_icons={
 
 config/name="ecosystem"
 config/icon="res://icon.png"
+
+[autoload]
+
+AutoLoads="*res://Scripts/AutoLoads.gd"
+Steering="*res://Scripts/Steering.gd"
+
+[input]
+
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+fwd={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+ ]
+}
+back={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+ ]
+}
+left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [rendering]
 

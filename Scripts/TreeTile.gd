@@ -1,10 +1,10 @@
 extends Tile
 
-class_name WaterTile
+class_name TreeTile
 
 func init(positionVector = Vector3(0,0,0)):
 	.init(positionVector)
-	tiletype = "water"
+	tiletype = "tree"
 	
 	
 
@@ -14,3 +14,5 @@ func get_tile_type()->String:
 
 func _ready():
 	pass
+
+
