@@ -1,5 +1,7 @@
 extends Spatial
 
+class_name SceneRoot
+
 var GameWorldScene = preload("res://Scenes/GameWorld.tscn")
 
 func _ready():

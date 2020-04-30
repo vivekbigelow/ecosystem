@@ -160,6 +160,99 @@ compares the squared magnitude of two Vectors and returns true if a < b and fals
 
 Currently this method just appends the end position to an array and returns it. So when an animal creates a path it will jump straight to the end position. I originally used the bresenham line algorithm to get a straight path from start to end, but those paths will almost never be completly walkable. A better approach would be using A star or another path finding algorithm to generate a path to the target. 
 
+### Terrain.gd
+
+Extends : Spatial
+
+#### Member Variables
+
+noise : instance of the OpenSimplexNoise class. Used for generating noise values
+
+grassTiles : Array containing all grass tiles
+
+waterTiles : Array containing all water tiles
+
+plantTiles : Array containing all plant tiles
+
+treeTiles : Array containing all tree tiles
+
+walkable : 2d Array of booleans, where each element corresponds to a tile in the terrain. If the tile is grass than the element is true
+
+walkableTiles : Array of the positions of grass tiles. I found that I needed the positions of the tiles more than the acutal tile instance. 
+
+isWater : 2d Array of booleans, where each element corresponds to a tile in the terrain. If the tile is water than the element is true.
+
+walkableNeighborsMatrix : 2d Array of arrays of Vector2 positions, where each Vector2 array contains the walkable neighbors of each tile in the map.
+
+isShore : a 2d Array of booleans. Each element corresponds to a tile in the map and is true if that tile is walkable and neighbors a water tilei
+
+isFood : a 2d Array of booleans. Each element corresponds to a tile in the map and is true if that tile is a plant tile. (Since I only have rabbits, the only food is plants)
+
+isFoodNeighbor : a 2d Array of booleans. Elements are true if the tile neighbors a plant tile and is walkable.
+ 
+size : the size of the map, used to create a square with width and height equal to size
+
+GrassTileScene : preload of GrassTileScene
+
+WaterTileScene : preload of WaterTileScene
+
+TreeTileScene : preload of TreeTileScene
+
+PlantTileScene : preload of PlantTileScene
+
+#### Methods
+
+*init(size) : void*
+
+calls the randomize() to reset the seed. Assigns and creates the tile data arrays. Generates the terrain.
+
+*test_generate(width,height) : void*
+
+creates a map of all grass tiles for testing purposes
+
+*generate_terrain(width, height) : void*
+
+sets the parameters of the noise. Creates the tiles of the terrain based on values obtained by from noise.get_noise_2d(x,z), where x and z are the coordinates of the new tile. Noise is just used for creating water and grass tiles, so that the terrain looks natural. If a grasstile is going to be made a random number is used to determine if the new tile will be a tree or a plant. 
+
+*generate_tile(type : int, position : Vector3) : void*
+
+Called by generate_terrain() to create individual tiles. The type indicates which kind of tile is made and the position is the position of the tile. Adds each tile to the Scene Tree. 
+
+*find_walkable_neighbors() : void*
+
+creates the walkable neighbors matrix
+
+*walkable_tiles() : void*
+
+creates the walkable matrix of boolean values
+
+*find_shore_tiles() : void*
+ 
+creates the isShore matrix
+
+*find_food_neighbor_tiles() : void*
+
+creates the isFoodNeighbor matrix
+
+### Tile.gd
+
+Extends : Spatial
+
+#### Member Variables
+
+tiletype : The type of tile
+
+position : The Vector3 position of the tile
+
+#### Methods
+
+*init(positionVector: Vector3(0,0,0)) : void*
+
+sets position to passed positionVector. Translates the scene to position. 
+
+*get_tile_type() : String*
+
+returns the type of the tile
 
 
 

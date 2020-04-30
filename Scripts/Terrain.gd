@@ -89,7 +89,7 @@ func generate_terrain(width,height):
 #pass a the tile type and position to be created
 
 	
-func generate_tile(type, position):
+func generate_tile(type : int, position: Vector3):
 	var tile
 	
 	#Grass tile

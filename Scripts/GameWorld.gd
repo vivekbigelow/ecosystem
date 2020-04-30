@@ -1,5 +1,7 @@
 extends Spatial
 
+class_name GameWorld
+
 var TerrainScene = preload("res://Scenes/Terrain.tscn")
 var terrainGenerator : Terrain
 var AnimalScene = preload("res://Scenes/Rabbit.tscn")
