@@ -81,7 +81,7 @@ GameWorld Scene : a preload of the GameWorld scene
 
 #### Methods
 
-**ready() : void**
+*ready() : void*
 
 creates an instance of the GameWorld Scene and calls the GameWorld init function passing a size of 50. Adds the GameWorld instance to the scene tree.
 
@@ -121,11 +121,45 @@ maxViewDistance : the maximum distance that an animal can see.
 
 #### Methods
 
-**RegisterDeath(entity) : void**
+*init(size : int) : void*
+
+creates an instance of the terrain scene with width and height of size and adds it to the scene tree. Assigns and creates the useful tile data arrays. Spawns the initial population.
+
+*RegisterDeath(entity) : void*
 
 prints the name of the entity and frees the entity from the queue
 
-**get_next_tile_random(current : Vector2) : Vector2**
+*get_next_tile_random(current : Vector2) : Vector2*
+
+takes a Vector2 position **current** and returns a position of a walkable neighbor tile to that position. If there aren't any walkable neighbors then the original position is returned. If there are multiple neighbors than a random one is selected. This method is used for the Exploring state of animals.
+
+*SenseWater(position : Vector2) : Vector2*
+
+takes a Vector2 position and returns the position of a random shore tile (a tile that is walkable and neighbors water)
+
+*SenseFood (position : Vector2) : Vector2*
+
+takes a Vector2 position and returns the position of a random plant tile
+
+*spawnInitialPopulation() : void*
+creates between 1 and 10 animal instances and gives each an inital position on a random walkable tile
+
+#### Utility Methods
+
+Mehtods in the GameWorld class that help other functions.
+
+*CheckNeighbors(position : Vector2, target : Vector2) : bool*
+
+Checks if the two positions are neighbors and returns a boolean
+
+*Vector2Compare(a : Vector2, b : Vector2) : bool*
+
+compares the squared magnitude of two Vectors and returns true if a < b and false if a > b
+
+*GetPath(start : Vector2, end : Vector2) : Array of Vector2s that form a path from start to end, where each Vector 2 contains the position of a walkable tile*
+
+Currently this method just appends the end position to an array and returns it. So when an animal creates a path it will jump straight to the end position. I originally used the bresenham line algorithm to get a straight path from start to end, but those paths will almost never be completly walkable. A better approach would be using A star or another path finding algorithm to generate a path to the target. 
+
 
 
 
