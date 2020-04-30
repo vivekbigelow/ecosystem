@@ -22,12 +22,12 @@ _global_script_classes=[ {
 "base": "State",
 "class": "QuenchThirstState",
 "language": "GDScript",
-"path": "res://Scripts/QuenchThirstState.gd"
+"path": "res://Scripts/Unused/QuenchThirstState.gd"
 }, {
 "base": "KinematicBody",
 "class": "State",
 "language": "GDScript",
-"path": "res://Scripts/State.gd"
+"path": "res://Scripts/Unused/State.gd"
 }, {
 "base": "Spatial",
 "class": "Terrain",
@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "State",
 "class": "WanderState",
 "language": "GDScript",
-"path": "res://Scripts/WanderState.gd"
+"path": "res://Scripts/Unused/WanderState.gd"
 }, {
 "base": "Tile",
 "class": "WaterTile",
