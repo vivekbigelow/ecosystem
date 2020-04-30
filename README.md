@@ -77,5 +77,42 @@ Extends : Spatial
 
 #### Member Variables
 
+GameWorld Scene : a preload of the GameWorld scene
+
+#### Methods
+
+**ready() : void**
+creates an instance of the GameWorld Scene and calls the GameWorld init function passing a size of 50. Adds the GameWorld instance to the scene tree.
+
+### GameWorld.gd
+
+Extends : Spatial
+
+#### Member Variables
+
+TerrainScene : a preload of the Terrain Scene
+terrainGenerator : a Terrain object made for calling methods from the Terrain class
+AnimalScene : a preload of the Animal Scene
+size : the size of the map (currently the map only makes a square with width and height equal to size)
+walkable : a 2d Array of booleans where the indicies relate to tile positions. If the element is true then agents can walk on the tile at that position
+walkAbleNeighborsMatrix : a 2d Array of Vector2 objects where indicies relate to the position of tiles in the map. Each tile position contains an array of the positions of tiles that are walkable and neighbor the tile at the index position. 
+walkableTiles : an array containing all of the walkable tiles in the map
+isShore : a 2d Array of booleans. Each element corresponds to a tile in the map and is true if that tile is walkable and neighbors a water tilei
+isFood : a 2d Array of booleans. Each element corresponds to a tile in the map and is true if that tile is a plant tile. (Since I only have rabbits, the only food is plants)
+isFoodNeighbor : a 2d Array of booleans. Elements are true if the tile neighbors a plant tile and is walkable.
+shoreTiles : an array of the positions of all the walkable tiles that neighbor water tiles
+foodTiles : an array of the positions of all the plant tiles
+closestVisibleShoreMatrix : a 2d Array of Vector2 positions. Each Vector2 corresponds to a tile on the map and contains the position of the closest Shore tile that is within the maxViewDistance. The current implementation does not utilize this array. The idea is that when an animal needs to build a path to a shore tile for water this array will return the closest shore tile that they can see. 
+maxViewDistance : the maximum distance that an animal can see.
+
+#### Methods
+
+**RegisterDeath(entity) : void**
+prints the name of the entity and frees the entity from the queue
+
+**get_next_tile_random(current : Vector2) : Vector2**
+
+
+
   
  
