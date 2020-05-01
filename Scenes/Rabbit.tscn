@@ -61,7 +61,6 @@ surfaces/3 = {
 extents = Vector3( 1, 1.60629, 1.54035 )
 
 [node name="Rabbit" type="KinematicBody"]
-editor/display_folded = true
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0 )
 script = ExtResource( 1 )
 

@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/GrassTile.gd"
 }, {
+"base": "Tile",
+"class": "PlantTile",
+"language": "GDScript",
+"path": "res://Scripts/PlantTile.gd"
+}, {
 "base": "State",
 "class": "QuenchThirstState",
 "language": "GDScript",
@@ -68,6 +73,7 @@ _global_script_class_icons={
 "Animal": "",
 "GameWorld": "",
 "GrassTile": "",
+"PlantTile": "",
 "QuenchThirstState": "",
 "SceneRoot": "",
 "State": "",

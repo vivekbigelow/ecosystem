@@ -8,10 +8,10 @@ var maxViewDistance
 var timeToDeathByHunger = 200
 var timeToDeathByThirst = 200
 var timeToDeathByAge = 400
-var timebetweenActionChoices = 1
+#var timebetweenActionChoices = 1
 
 var position := Vector2.ZERO
-onready var terrain = self.get_node("../Terrain")
+#onready var terrain = self.get_node("../Terrain")
 var speed = 1.5
 var velocity := Vector3.ZERO
 
@@ -54,7 +54,7 @@ var moveArcHeight = 0.2
 var moveArcHeightFactor = 1.0
 var path = []
 var pathIndex : int
-var loopNum = 0
+
 
 
 func _ready():
@@ -66,6 +66,8 @@ func init(position : Vector2, gameworld):
 	self.position = position
 	self.translation = Vector3(position.x , 1, position.y)
 	age = 0
+	hunger = 0
+	age = 0
 	print("Exploring")
 	#moveFromPosition = position
 	ChooseNextAction()
@@ -74,11 +76,6 @@ func _process(delta)->void:
 	hunger += delta * 10 / timeToDeathByHunger
 	thirst += delta * 10 / timeToDeathByThirst
 	age+= delta * 10/timeToDeathByAge
-	if(animatingMovement):	
-		AnimateMove(delta)
-	else:
-		ChooseNextAction()
-	
 	
 	if (hunger >= 1.5):
 		Die(CauseOfDeath.Hunger)
@@ -86,7 +83,11 @@ func _process(delta)->void:
 		Die(CauseOfDeath.Thirst)
 	if(age >= 1):
 		Die(CauseOfDeath.Age)
-	
+		
+	if(animatingMovement):	
+		AnimateMove(delta)
+	else:
+		ChooseNextAction()
 	
 
 func ChooseNextAction():

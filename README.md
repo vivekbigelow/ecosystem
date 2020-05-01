@@ -68,6 +68,12 @@ An inherited scene from the tree.glb model. Used as a node in the TreeTile scene
 
 An inherited scene from the plant.glb model. Used as a node in the PlantTile scene.
 
+### Rabbit
+#### Scripts : Animal.gd
+#### SceneTree : KinematicBody Rabbit, MeshInstance rabbit, CollisionShape
+ 
+The rabbit scene that contains the rabbit model mesh. Used to spawn rabbits into the gameworld in the GameWorld.gd script
+
 
 ## Scripts
 
@@ -253,6 +259,177 @@ sets position to passed positionVector. Translates the scene to position.
 *get_tile_type() : String*
 
 returns the type of the tile
+
+### GrassTile.gd
+
+Extends : Tile
+
+#### Methods
+
+*init(positionVector : Vector3(0,0,0)) : void*
+
+sets the position vector to postionVector. Sets tileType to "grass"
+
+*get_tile_type() : String*
+
+returns the type of the tile
+
+### WaterTile.gd
+
+Extends : Tile
+
+#### Methods
+
+*init(positionVector : Vector3(0,0,0)) : void*
+
+sets the position vector to postionVector. Sets tileType to "water"
+
+*get_tile_type() : String*
+
+returns the type of the tile
+
+### PlantTile.gd
+
+Extends : Tile
+
+#### Methods
+
+*init(positionVector : Vector3(0,0,0)) : void*
+
+sets the position vector to postionVector. Sets tileType to "plant"
+
+*get_tile_type() : String*
+
+returns the type of the tile
+
+### TreeTile.gd
+
+Extends : Tile
+
+#### Methods
+
+*init(positionVector : Vector3(0,0,0)) : void*
+
+sets the position vector to postionVector. Sets tileType to "tree"
+
+*get_tile_type() : String*
+
+returns the type of the tile
+
+### Animal.gd
+
+Extends : KinematicBody
+
+#### Member Variables
+
+GameWorld : The instance of the GameWorld created in the SceneRoot. Acts as a singleton so that Animals can use GameWorld methods
+
+maxViewDistance : The maximum distance away that an animal can see
+
+timeToDeathByHunger : The amount of time until the animal will die by hunger
+
+timeToDeathByThirst : The amount of time until the animal will die by thirst
+
+timeToDeathByAge : The amount of time until the animal die due to age
+
+position : Vector2 of the (x,z) coordinates of the animal
+
+speed : the speed of the animal
+
+velocity : Vector3 that contains the velocity motion vector
+
+hunger : The current hunger value of the animal
+
+thirst : The current thrist value of the animal
+
+age : The current age of the animal
+
+criticalPercent : Threshold that indicates when hunger or thirst are critical
+
+foodTarget : Position of the food the animal has found
+
+waterTarget : Position of the water the animal has found
+
+dead : Boolean to indicate whether the animal is dead
+
+CauseOfDeath : enum(Hunger, Thirst, Age, Eaten) the possible causes of death
+
+CreatureAction : enum(None, Resting, Exploring, GoingToFood, GoingToWater, Eating, Drinking, SearchingForMate) The potential actions an animal can take
+
+currentAction : The current creature action
+
+animatingMovement : a boolean that indicates whether movement needs to be animated
+
+moveTime : 
+
+path : the current path of tile positions the animal is moving in
+
+pathIndex : where in the current path the animal is 
+
+#### Methods
+
+*init(position : Vector2, gameworld) : void*
+
+sets the position and gameworld of the animal. Initializes the age,hunger, and thirst variable. Calls ChooseNextAction()
+
+*_process(delta) : void*
+
+increments hunger, thirst, and age based on delta.If hunger, thirst, or age exceeds the threshold, then Die(Cause) is called.  If animatingMovement is true then AnimateMovement(delta) is called otherwise calls ChooseNextAction(). 
+
+*ChooseNextAction() : void*
+
+Checks to see if the animal needs to FindWater() or FindFood(). If neither then calls Act()
+
+*Act(): void*
+
+Chooses the next action depending on the currentAction. If Exploring then StartMoveToPosition is called. If GoingToFood determines if the creature can eat or if it is still moving to the food position. Same with GoingToWater. If the currentAction is drinking then DrinkWater() is called, if currentAction is eating then EatFood() is called. 
+
+*StartMoveToPosition(target : Vector2) : void*
+
+sets the moveTargetPosition to target and sets animatingMovement to true
+
+*FindFood(): void*
+
+Uses gameworld to sense a random food tile. Starts to move to the food tile.
+
+*FindWater(): void*
+
+Uses gameworld to sense a random water tile. Starts to move the water tile.
+
+*DrinkWater(): void*
+
+resets thirst to 0. Switches currentAction to Exploring. Calls ChooseNextAction()
+
+*EatFood() : void*
+
+resets hunger to 0. Switches currentAction to Exploring. Calls ChooseNextAction()
+
+*CreatePath(target : Vector2) : void*
+
+uses GameWorld to get a path from the current position to the target position
+
+*AnimateMove(delta) : void*
+
+Uses delta and speed to set the moveTime. Then uses the current position, target position, and movetime to interpolate translation in the x and z planes. Translation in y is based on sin(PI * movetime). This movement is for rabbits only. When movetime is greater than 1 the new position is set, moveTime is reset, animatingMovement is set to false, and ChooseNextAction() is called.
+
+*Die(cause):void*
+
+sets dead to true. Prints the cause of death and calls GameWorld.RegisterDeath(self) freeing the entity from the queue.
+
+### AutoLoads
+
+Singleton methods that can be called from every node in the game scene.
+
+Extends : Node
+
+#### Methods
+
+*static func new_2d_array(width, height, value): returns a 2d array*
+
+Function that builds and returns a 2d array with width and height filled with value.
+
+
+
 
 
 
